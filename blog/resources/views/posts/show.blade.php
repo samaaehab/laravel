@@ -8,19 +8,12 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-        <span class="fw-bolder">Title:- </span><span> An item</span>
+        <span class="fw-bolder">Title:- </span><span> {{$detail[0]->title}}</span>
     </li>
     <li class="list-group-item">
-        <span class="fw-bolder">Posted by:- </span><span> An item</span>    
+        <span class="fw-bolder">Description:- </span><span>{{$detail[0]->description}}</span>    
     </li>
-    <li class="list-group-item">
-        <span class="fw-bolder">Description:- </span><span> Some quick example text to build on the card title and make up the bulk of the card's content</span>    
-    </li>
-    <li class="list-group-item">
-        <span class="fw-bolder">Created At:- </span><span> An item</span>    
-    
-    </li>
-
+ 
   </ul>
 </div>
 
@@ -28,21 +21,17 @@
 
 <div class="card" style="width: 18rem;">
   <div class="card-header">
-    <h5>Post Info </h5>
+    <h5>Post Creator Info </h5>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-        <span class="fw-bolder">Title:- </span><span> An item</span>
+      <span class="fw-bolder">Name:- </span><span> {{$detail[0]->user->name}}</span>
     </li>
     <li class="list-group-item">
-        <span class="fw-bolder">Posted by:- </span><span> An item</span>    
+        <span class="fw-bolder"> Email:- </span><span> {{$detail[0]->user->email}}</span>    
     </li>
     <li class="list-group-item">
-        <span class="fw-bolder">Description:- </span><span> Some quick example text to build on the card title and make up the bulk of the card's content</span>    
-    </li>
-    <li class="list-group-item">
-        <span class="fw-bolder">Created At:- </span><span> An item</span>    
-    
+        <span class="fw-bolder">Created At:- </span><span> {{$detail[0]->created_at}}</span>    
     </li>
 
   </ul>

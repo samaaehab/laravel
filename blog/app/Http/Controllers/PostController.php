@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
+use App\Models\User;
+
 
 use Illuminate\Http\Request;
 
@@ -8,32 +11,47 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = [
-            ['title' => 'First Post', 'posted_by'=> 'Ahmed', 'created_at' => '2022-01-20'],
-            ['title' => 'Second Post', 'posted_by'=> 'Mohamed', 'created_at' => '2022-01-20'],
-            ['title' => 'Third Post', 'posted_by'=> 'Ali', 'created_at' => '2022-01-20'],
-        ];
-
+        $allPosts = Post::all();
         return view('posts.index', [
             'allPosts' => $allPosts
         ]);
     }
     public function create()
     {
-        return view('posts.create');
+        $allUsers=User::all();
+        // dd($allUsers);
+        return view('posts.create',[
+            'allUsers'=>$allUsers
+        ]);
     }
     public function store()
     {
+        $data=request()->all();
+        //dd($data);
+
+        Post::create([
+            'title'=> $data['title'],
+            'description'=> $data['description'],
+            'user_id'=>$data['post_creator']
+        ]);
+
         return redirect()->route('posts.index');
     }
     public function show($postId)
     {
-        return view('posts.show');
+        $detail=Post::where('id',$postId)->get();
+        // dd($detail);
+        return view('posts.show',[
+            'detail'=>$detail
+        ]);
         
     }
-    public function edit()
+    public function edit($postId)
     {
-        return view('posts.edit');
+        $detail=Post::where('id',$postId)->get();
+        return view('posts.edit',[
+            'detail'=>$detail
+        ]);
         
     }
     public function update()
@@ -41,8 +59,9 @@ class PostController extends Controller
         return redirect()->route('posts.index');
         
     }
-    public function destroy()
+    public function destroy($postId)
     {
+        $deleted = DB::table('posts')->where('id', '=', $postId)->delete();
         return redirect()->route('posts.index');
         
     }

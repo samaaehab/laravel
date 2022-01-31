@@ -20,14 +20,14 @@
         <tbody>
             @foreach($allPosts as $post)
             <tr>
-                <th scope="row">1</th>
-                <td>{{ $post['title'] }}</td>
-                <td>{{ $post['posted_by'] }}</td>
-                <td>{{ $post['created_at'] }}</td>
+                <th scope="row">{{ $post->id }}</th>
+                <td>{{ $post->title }}</td>
+                <td>{{ $post->user->name }}</td>
+                <td>{{ date('d-m-Y', strtotime($post->created_at));}}</td>
                 <td>
-                    <a href="/posts/{{$post['title']}}" class="btn btn-success">View</a>
-                    <a href="{{route('posts.edit')}}" class="btn btn-secondary">Edit</a>
-                    <a href="{{route('posts.destroy')}}" class="btn btn-dark">Delete</a>
+                    <a href="/posts/{{$post->id}}" class="btn btn-success">View</a>
+                    <a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
+                    <a href="/posts/{{$post->id}}/delete" class="btn btn-dark">Delete</a>
 
                 </td>
             </tr>
