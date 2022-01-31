@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::all();
+        $allPosts = Post::paginate(3);
         return view('posts.index', [
             'allPosts' => $allPosts
         ]);
@@ -54,15 +54,21 @@ class PostController extends Controller
         ]);
         
     }
-    public function update()
+    public function update( Post $post)
     {
+       
+        $data=request()->all();
+        $post->update($data);
+       
         return redirect()->route('posts.index');
         
     }
-    public function destroy($postId)
+    public function destroy(Post $post)
     {
-        $deleted = DB::table('posts')->where('id', '=', $postId)->delete();
-        return redirect()->route('posts.index');
+        // $deleted = DB::table('posts')->where('id', '=', $postId)->delete();
+        $post->delete();
+        return redirect()->route('posts.index')
+        ->with('success','Product deleted successfully');;
         
     }
 }

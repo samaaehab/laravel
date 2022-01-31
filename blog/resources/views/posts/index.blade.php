@@ -25,14 +25,22 @@
                 <td>{{ $post->user->name }}</td>
                 <td>{{ date('d-m-Y', strtotime($post->created_at));}}</td>
                 <td>
-                    <a href="/posts/{{$post->id}}" class="btn btn-success">View</a>
-                    <a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
-                    <a href="/posts/{{$post->id}}/delete" class="btn btn-dark">Delete</a>
+                     <form action="{{route('posts.destroy',$post->id)}}" method="POST">
 
+                        <a href="{{route('posts.show',$post->id)}}" class="btn btn-success">View</a>
+                        <a href="{{route('posts.edit',$post->id)}}" class="btn btn-secondary">Edit</a>
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit" class="btn btn-dark">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
+    <span>
+        {{$allPosts->(links())}}
+    </span>
 @endsection
