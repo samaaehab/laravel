@@ -13,6 +13,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Posted By</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -23,11 +24,12 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->user->name }}</td>
+                <td>{{ $post->slug }}</td>
                 <td>{{ date('d-m-Y', strtotime($post->created_at));}}</td>
                 <td>
                      <form action="{{route('posts.destroy',$post->id)}}" method="POST">
 
-                        <a href="{{route('posts.show',$post->id)}}" class="btn btn-success">View</a>
+                        <a href="{{route('posts.show',$post->slug)}}" class="btn btn-success">View</a>
                         <a href="{{route('posts.edit',$post->id)}}" class="btn btn-secondary">Edit</a>
 
                         @csrf
@@ -40,13 +42,13 @@
             @endforeach
         </tbody>
     </table>
-    <span >
-        {{$allPosts->links()}}
-    </span>
+    <ul class="pagination">{{ $allPosts->links() }}</ul> 
+
     <style>
         .w-5{
             display:none;
 
         }
+
     </style>
 @endsection

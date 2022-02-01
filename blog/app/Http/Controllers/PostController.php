@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::paginate(3);
+        $allPosts = Post::simplePaginate(3);
         return view('posts.index', [
             'allPosts' => $allPosts
         ]);
@@ -40,15 +40,21 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
-    public function show($postId)
-    {
-        $detail=Post::where('id',$postId)->get();
-        // dd($detail);
-        return view('posts.show',[
-            'detail'=>$detail
-        ]);
+    // public function show($postId)
+    // {
+    //     $detail=Post::where('id',$postId)->get();
+    //     // dd($detail);
+    //     return view('posts.show',[
+    //         'detail'=>$detail
+    //     ]);
         
-    }
+    // }
+    public function show($slug)
+    {
+        $post = Post::where('slug',$slug)->get();
+        return view('posts.show',['post'=>$post]);
+    } 
+
     public function edit($postId)
     {
         $detail=Post::where('id',$postId)->get();
