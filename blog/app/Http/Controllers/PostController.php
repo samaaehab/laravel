@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
+
 
 
 use Illuminate\Http\Request;
@@ -24,7 +27,7 @@ class PostController extends Controller
             'allUsers'=>$allUsers
         ]);
     }
-    public function store()
+    public function store(StorePostRequest $request)
     {
         $data=request()->all();
         //dd($data);
@@ -54,7 +57,7 @@ class PostController extends Controller
         ]);
         
     }
-    public function update( Post $post)
+    public function update( UpdatePostRequest $req,Post $post)
     {
        
         $data=request()->all();

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title') Index @endsection
 
@@ -40,7 +40,13 @@
             @endforeach
         </tbody>
     </table>
-    <span>
-        {{$allPosts->(links())}}
+    <span >
+        {{$allPosts->links()}}
     </span>
+    <style>
+        .w-5{
+            display:none;
+
+        }
+    </style>
 @endsection
